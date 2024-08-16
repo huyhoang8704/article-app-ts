@@ -109,6 +109,18 @@ export const resolvers = {
       
             return data;
           },
+    },
+    
+    Article: {
+        category: async (article) => {
+          const categoryId = article.categoryId;
+    
+          const category = await Category.findOne({
+            _id: categoryId
+          });
+    
+          return category;
+        }
     }
 }
 
