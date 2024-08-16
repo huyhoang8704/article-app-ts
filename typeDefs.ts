@@ -21,6 +21,7 @@ export const typeDefs = gql`
             description : String
         ) : Article
         deleteArticle(id : ID) : String
+        updateArticle(id : ID , title : String, avatar : String, description : String) : Article
     }
 
 `;
