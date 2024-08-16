@@ -3,7 +3,8 @@ import { gql } from "apollo-server-express";
 export const typeDefs = gql`
     type Query {
         hello : String,
-        getArticles : [Article]
+        getArticle(id : ID) : Article,
+        getListArticles : [Article]
     }
     type Article {
         id : ID,
