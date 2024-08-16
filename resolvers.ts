@@ -32,6 +32,16 @@ export const resolvers = {
             })
             await article.save();
             return article 
+        },
+        deleteArticle : async (_ , args) =>{
+            const {id} = args;
+            await Article.updateOne({
+                _id : id,
+            }, {
+                deleted : true,
+                deletedAt : new Date()
+            })
+            return "Đã xóa thành công!"
         }
     }
 }
@@ -62,5 +72,9 @@ export const resolvers = {
             id
             title
         }
+    }
+ * Delete : Xóa 1 bài viết
+    mutation {
+        deleteArticle(id:"66bfc21f84f2e0e9048f6145")
     }
  */
