@@ -6,27 +6,16 @@ import * as database from "./config/database";
 
 import Article from "./models/article.model";
 import { ApolloServer, gql } from "apollo-server-express";
-
+import {typeDefs} from "./typeDefs";
+import {resolvers} from "./resolvers";
 const app : Express  = express()
 const port : number | string = process.env.PORT || 3001;
 
 dotenv.config();
 database.connect();
 
+// GraphQL
 const startServer = async () => {
-    // GraphQL
-    // Như Models
-    const typeDefs = gql`
-        type Query {
-        hello : String
-        }
-    `;
-    // Như Controllers
-    const resolvers = {
-        Query : {
-            hello : () => "Hello World"
-        }
-    }
     const apollpServer = new ApolloServer({
         typeDefs,
         resolvers
