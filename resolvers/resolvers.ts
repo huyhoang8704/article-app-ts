@@ -1,6 +1,6 @@
-import { Mutation } from './node_modules/apollo-server-core/src/plugin/schemaReporting/generated/operations.d';
-import Article from "./models/article.model"
-import Category from './models/category.model';
+import { Mutation } from 'apollo-server-core/src/plugin/schemaReporting/generated/operations';
+import Article from "../models/article.model"
+import Category from '../models/category.model';
 
 export const resolvers = {
     Query : {

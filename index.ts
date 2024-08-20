@@ -6,8 +6,8 @@ import * as database from "./config/database";
 
 import Article from "./models/article.model";
 import { ApolloServer, gql } from "apollo-server-express";
-import {typeDefs} from "./typeDefs";
-import {resolvers} from "./resolvers";
+import {typeDefs} from "./typeDefs/typeDefs";
+import {resolvers} from "./resolvers/resolvers";
 const app : Express  = express()
 const port : number | string = process.env.PORT || 3001;
 

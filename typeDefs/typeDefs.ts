@@ -1,4 +1,4 @@
-import { Mutation } from './node_modules/apollo-server-core/src/plugin/schemaReporting/generated/operations.d';
+import { Mutation } from 'apollo-server-core/src/plugin/schemaReporting/generated/operations';
 import { gql } from "apollo-server-express";
 
 export const typeDefs = gql`
