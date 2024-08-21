@@ -12,7 +12,8 @@ export const articleResolvers = {
                 currentPage , 
                 limitItems,
                 filterKey,
-                filterValue
+                filterValue,
+                keyword
             } = args;
             const find = {
                 deleted : false
@@ -30,6 +31,11 @@ export const articleResolvers = {
             // Filter
             if(filterKey && filterValue){
                 find[filterKey] = filterValue
+            }
+            // Tìm kiếm
+            if(keyword) {
+                const keywordRegex = new RegExp(keyword, "i");
+                find["title"] = keywordRegex;
             }
 
             const article = await Article.find(find).sort(sort).limit(limitItems).skip(skip);

@@ -23,6 +23,7 @@ export const typeDefsArticle = gql`
             limitItems : Int = 2,
             filterKey : String,
             filterValue : String,
+            keywords : String
         ) : [Article],
     }
     type Mutation {
