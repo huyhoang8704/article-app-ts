@@ -6,17 +6,24 @@ export const articleResolvers = {
     Query : {
         hello : () => "Hello World",
         getListArticles : async (_ , args) =>{
-            const {sortKey, sortValue} = args;
+            const {
+                sortKey, 
+                sortValue , 
+                currentPage , 
+                limitItems
+            } = args;
 
             // Sort
             const sort = {};
             if(sortKey && sortValue){
                 sort[sortKey] = sortValue
             }
+            // Pagination
+            const skip = (currentPage - 1) * limitItems;
 
             const article = await Article.find({
                 deleted : false
-            }).sort(sort);
+            }).sort(sort).limit(limitItems).skip(skip);
 
             return article;
         },
