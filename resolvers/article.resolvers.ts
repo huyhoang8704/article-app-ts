@@ -5,10 +5,18 @@ import Category from '../models/category.model';
 export const articleResolvers = {
     Query : {
         hello : () => "Hello World",
-        getListArticles : async () =>{
+        getListArticles : async (_ , args) =>{
+            const {sortKey, sortValue} = args;
+
+            // Sort
+            const sort = {};
+            if(sortKey && sortValue){
+                sort[sortKey] = sortValue
+            }
+
             const article = await Article.find({
                 deleted : false
-            })
+            }).sort(sort);
 
             return article;
         },
@@ -77,7 +85,10 @@ export const articleResolvers = {
 /**
  * Get : Lấy ra nhiều bài viết
     query {
-        getListArticles{
+        getListArticles(
+            sortKey : "title",
+            sortValue : "asc"
+        ),{
             title,
             avatar
         }

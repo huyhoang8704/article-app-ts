@@ -16,7 +16,7 @@ export const typeDefsArticle = gql`
         hello : String,
 
         getArticle(id : ID) : Article,
-        getListArticles : [Article],
+        getListArticles(sortKey : String , sortValue : String) : [Article],
     }
     type Mutation {
         createArticle(
