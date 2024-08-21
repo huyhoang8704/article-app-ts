@@ -20,7 +20,9 @@ export const typeDefsArticle = gql`
             sortKey : String , 
             sortValue : String,
             currentPage : Int = 1,
-            limitItems : Int = 2
+            limitItems : Int = 2,
+            filterKey : String,
+            filterValue : String,
         ) : [Article],
     }
     type Mutation {
