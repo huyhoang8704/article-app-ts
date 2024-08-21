@@ -2,25 +2,8 @@ import { Mutation } from 'apollo-server-core/src/plugin/schemaReporting/generate
 import Article from "../models/article.model"
 import Category from '../models/category.model';
 
-export const resolvers = {
+export const categoryResolvers = {
     Query : {
-        hello : () => "Hello World",
-        getListArticles : async () =>{
-            const article = await Article.find({
-                deleted : false
-            })
-
-            return article;
-        },
-        getArticle : async (_ ,args) =>{
-            const {id} = args;
-            const article = await Article.findOne({
-                deleted : false,
-                _id : id,
-            })
-
-            return article;
-        },
         getListCategory : async () =>{
             const categories = await Category.find({
                 deleted : false
@@ -40,41 +23,6 @@ export const resolvers = {
         
     },
     Mutation : {
-        createArticle : async (_ , args) =>{
-            const {title, avatar, description , categoryId} = args;
-            const article = new Article({
-                title : title,
-                avatar : avatar,
-                description : description,
-                categoryId : categoryId
-            })
-            await article.save();
-            return article 
-        },
-        deleteArticle : async (_ , args) =>{
-            const {id} = args;
-            await Article.updateOne({
-                _id : id,
-            }, {
-                deleted : true,
-                deletedAt : new Date()
-            })
-            return "Đã xóa thành công!"
-        },
-        updateArticle : async (_ , args) =>{
-            const {id, title, avatar, description} = args;
-            await Article.updateOne({
-                _id : id,
-            }, {
-                title : title,
-                avatar : avatar,
-                description : description
-            })
-            return await Article.findOne({
-                _id : id
-            })
-        },
-
         createCategory: async (_, args) => {
             const { category } = args;
             
@@ -112,17 +60,6 @@ export const resolvers = {
           },
     },
     
-    Article: {
-        category: async (article) => {
-          const categoryId = article.categoryId;
-    
-          const category = await Category.findOne({
-            _id: categoryId
-          });
-    
-          return category;
-        }
-    }
 }
 
 
