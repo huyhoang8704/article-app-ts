@@ -7,6 +7,7 @@ export const typeDefs = gql`
         title: String,
         avatar: String,
         description: String,
+        categoryId : String,
         category: Category
     }
 
@@ -33,10 +34,11 @@ export const typeDefs = gql`
         createArticle(
             title : String, 
             avatar : String, 
-            description : String
+            description : String,
+            categoryId : String
         ) : Article
         deleteArticle(id : ID) : String
-        updateArticle(id : ID , title : String, avatar : String, description : String) : Article
+        updateArticle(id : ID , title : String, avatar : String, description : String , categoryId : String) : Article
 
         createCategory(category: CategoryInput): Category,
         deleteCategory(id: String): String,

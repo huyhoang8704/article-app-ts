@@ -41,11 +41,12 @@ export const resolvers = {
     },
     Mutation : {
         createArticle : async (_ , args) =>{
-            const {title, avatar, description} = args;
+            const {title, avatar, description , categoryId} = args;
             const article = new Article({
                 title : title,
                 avatar : avatar,
-                description : description
+                description : description,
+                categoryId : categoryId
             })
             await article.save();
             return article 
