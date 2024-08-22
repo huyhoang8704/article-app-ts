@@ -38,6 +38,7 @@ export const articleResolvers = {
                 find["title"] = keywordRegex;
             }
 
+            
             const article = await Article.find(find).sort(sort).limit(limitItems).skip(skip);
 
             return article;
