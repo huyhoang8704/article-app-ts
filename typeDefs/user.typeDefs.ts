@@ -24,5 +24,8 @@ export const typeDefsUser = gql`
         registerUser(user: RegisterUserInput): User,
         loginUser(user: LoginUserInput): User,
     }
+    type Query {
+        getUser(id : ID) : User
+    }
 
 `;
