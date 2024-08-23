@@ -5,6 +5,7 @@ import * as database from "./config/database";
 import { ApolloServer, gql } from "apollo-server-express";
 import { typeDefs } from "./typeDefs/index.typeDefs";
 import {resolvers} from "./resolvers/index.resolvers";
+import { requireAuth } from "./middlewares/auth.middleware";
 
 
 
@@ -17,9 +18,14 @@ database.connect();
 
 // GraphQL
 const startServer = async () => {
+    app.use("/graphql",requireAuth); // Call API nó sẽ chạy qua middleware
+    
     const apollpServer = new ApolloServer({
         typeDefs: typeDefs,
         resolvers: resolvers,
+        context : ({req}) => {
+            return {...req};
+        }
     })
     await apollpServer.start();
     apollpServer.applyMiddleware({

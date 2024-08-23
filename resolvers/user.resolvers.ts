@@ -61,10 +61,12 @@ export const userResolvers = {
 
     },
     Query : {
-        getUser : async (_,args) => {
-            const {id} = args;
+        getUser : async (_, args, context) => {
+            const tokenVerify = context.tokenVerify
+            // console.log(tokenVerify)
+            // const {id} = args;
             const infoUser = await User.findOne({
-                _id : id,
+                token : tokenVerify,
                 deleted : false
             })
             if(infoUser) {
