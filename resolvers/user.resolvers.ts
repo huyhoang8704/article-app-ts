@@ -27,7 +27,37 @@ export const userResolvers = {
                     token : newUser.token
                   };
             }
-        }
+        },
+        loginUser : async (_,args) => {
+            const { user } = args;
+            const infoUser = await User.findOne({
+                email : user.email,
+                deleted : false
+            })
+            if(!infoUser) {
+                return {
+                    code : 400,
+                    message : "Email không tìm thấy!"
+                }
+            } else {
+                if(infoUser.password !== user.password) {
+                    return {
+                        code : 400,
+                        message : "Mat khau khong chinh xac!"
+                    }
+                } else {
+                    return {
+                        code: 200,
+                        message: "Thành công!",
+                        id: infoUser.id,
+                        fullName: infoUser.fullName,
+                        email: infoUser.email,
+                        token: infoUser.token
+                    }
+                }
+            }
+        },
+        
     },
     
 }
