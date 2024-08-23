@@ -23,6 +23,7 @@ const startServer = async () => {
     const apollpServer = new ApolloServer({
         typeDefs: typeDefs,
         resolvers: resolvers,
+        introspection: true, // Gợi ý hàm trên online
         context : ({req}) => {
             return {...req};
         }
